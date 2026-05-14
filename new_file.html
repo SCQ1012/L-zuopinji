@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>内容创意作品集 · 李清露</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%);
+            color: #1a2a3a;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 头部个人介绍 */
+        .hero {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 32px 28px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(80, 180, 160, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #00796b, #2e7d64);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .title {
+            font-size: 18px;
+            color: #00897b;
+            margin-bottom: 20px;
+            border-left: 3px solid #4db6ac;
+            padding-left: 12px;
+        }
+
+        .intro-text {
+            font-size: 15px;
+            color: #2c3e2f;
+            margin-bottom: 20px;
+        }
+
+        .acg-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .badge {
+            background: rgba(77, 182, 172, 0.2);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            border: 1px solid rgba(77, 182, 172, 0.5);
+            color: #00695c;
+        }
+
+        /* 通用卡片样式 */
+        .section {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(80, 180, 160, 0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00695c;
+        }
+
+        .section-title span {
+            background: #4db6ac;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* 音乐卡片 */
+        .music-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .music-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            transition: 0.2s;
+            border: 1px solid #d0e8e0;
+        }
+
+        .music-card:hover {
+            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+        }
+
+        .music-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c3e2f;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 40px;
+        }
+
+        /* 视频网格 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 1px solid #cce5df;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #1e3a2f;
+        }
+
+        .platform {
+            font-size: 12px;
+            color: #5f7f6e;
+            margin-top: 6px;
+        }
+
+        /* AI产品轮播 */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding-bottom: 16px;
+            scrollbar-width: thin;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-track::-webkit-scrollbar-track {
+            background: #cfe9e2;
+            border-radius: 10px;
+        }
+
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: #4db6ac;
+            border-radius: 10px;
+        }
+
+        .carousel-item {
+            flex: 0 0 85%;
+            scroll-snap-align: start;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .carousel-caption {
+            padding: 12px;
+            font-size: 13px;
+            text-align: center;
+            color: #2c5a4a;
+        }
+
+        /* H5二维码区域 */
+        .h5-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .qrcode-box {
+            text-align: center;
+            background: white;
+            padding: 16px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid #cce0da;
+        }
+
+        .qrcode-box img {
+            width: 140px;
+            height: 140px;
+            display: block;
+        }
+
+        .h5-link {
+            word-break: break-all;
+            background: #f0f9f6;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #00897b;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0 20px;
+            font-size: 13px;
+            color: #5f8b7a;
+        }
+
+        @media (max-width: 600px) {
+            .hero, .section {
+                padding: 20px;
+            }
+            .name {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- ================= 1. 个人介绍区域 ================= -->
+    <div class="hero">
+        <div class="name">李清露</div>
+        <div class="title">内容创意运营</div>
+        <div class="intro-text">
+            2026届应届生，第五人格，燕云十六声等游戏深度玩家，B站6级号。<br>
+            擅长从玩家视角拆解卖点，能和发行团队高效配合。相信好的内容自己会说话。
+        </div>
+        <div class="acg-badge">
+            <span class="badge">🎮 ACG深度用户</span>
+            <span class="badge">✂️ PR/AE/PS</span>
+            <span class="badge">🎵 配乐/策划</span>
+            <span class="badge">📱 抖音/B站/快手敏感体质</span>
+        </div>
+    </div>
+
+    <!-- 音乐作品 -->
+    <div class="section">
+        <div class="section-title">
+            <span>🎵</span> 音乐作品 · 可直接播放
+        </div>
+        <div class="music-grid">
+            <div class="music-card">
+                <div class="music-title">🎹 《失乐园》- 第五人格同人音乐 - 制作人</div>
+                <audio controls src="策划-圆舞曲-失乐园-25-3.mp3">您的浏览器不支持audio标签</audio>
+            </div>
+            <div class="music-card">
+                <div class="music-title">🎼 古风流行原创曲 - 编曲</div>
+                <audio controls src="编曲-流行-练习2-25-9.mp3">您的浏览器不支持audio标签</audio>
+            </div>
+        </div>
+    </div>
+    <!-- ================= 3. 视频封面 + 链接 ================= -->
+    <div class="section">
+        <div class="section-title">
+            <span>🎬</span> 剪辑作品 · 点击封面观看
+        </div>
+        <div class="video-grid">
+            <a href="https://www.bilibili.com/video/BV1Nr421n7FY" target="_blank" class="video-card">
+                <img class="video-thumb" src="QQ图片20240316005034.jpg" alt="视频封面">
+                <div class="video-info">
+                    <div class="video-name">【第五人格】“噩梦”个人向剪辑</div>
+                    <div class="platform">▶️ B站 4w+播放 担任粗剪</div>
+                </div>
+            </a>
+            <a href="https://www.bilibili.com/video/BV12vRVYZEFd" target="_blank" class="video-card">
+                <img class="video-thumb" src="mmexport1741022680929.jpg" alt="视频封面">
+                <div class="video-info">
+                    <div class="video-name">失乐园 · 第五人格喧嚣马戏团群像混剪</div>
+                    <div class="platform">▶️ B站 3w点赞 负责素材筛选和分镜</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- ================= 4. AI产品图轮播 ================= -->
+    <div class="section">
+        <div class="section-title">
+            <span>🖼️</span> AI生成产品图 · 横滑浏览
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-item">
+                    <img src="aichanpin.png" alt="AI产品图">
+                    <div class="carousel-caption">「洛天依」星途漫游系列挂件</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="canvaxuantu.png" alt="canvas宣传图">
+                    <div class="carousel-caption">「苏长清」修音价格表</div>
+                </div>
+            </div>
+        </div>
+        <div style="font-size:12px; text-align:center; margin-top:12px; color:#5f8b7a;">👆 手指左右滑动 / 鼠标拖动滚动条</div>
+    </div>
+
+    <div class="footer">
+        📧 李清露 · 内容创意运营 · 作品持续更新中<br>
+        所有作品均为个人原创或项目实操作品
+    </div>
+</div>
+</body>
+</html>
+
+
